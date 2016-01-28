@@ -54,6 +54,7 @@ module Selenium
             retries = 0
 
             begin
+              puts(verb: verb, url: url, headers: headers, payload: payload)
               request = new_request_for(verb, url, headers, payload)
               response = response_for(request)
             rescue Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EADDRINUSE
