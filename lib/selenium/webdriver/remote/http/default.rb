@@ -54,7 +54,6 @@ module Selenium
             retries = 0
 
             begin
-              puts(verb: verb, url: url, headers: headers, payload: payload)
               request = new_request_for(verb, url, headers, payload)
               response = response_for(request)
             rescue Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EADDRINUSE
@@ -106,6 +105,10 @@ module Selenium
 
           def response_for(request)
             http.request request
+          rescue Net::ReadTimeout
+            puts(timeout: @timeout)
+            puts(class: request.class, path: request.path, body: request.body)
+            raise
           end
 
           def new_http_client
