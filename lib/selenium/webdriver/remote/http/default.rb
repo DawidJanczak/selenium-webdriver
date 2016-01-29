@@ -107,6 +107,7 @@ module Selenium
             http.request request
           rescue Net::ReadTimeout
             puts(timeout: @timeout)
+            puts(time: Time.now)
             puts(class: request.class, path: request.path, body: request.body)
             raise
           end
